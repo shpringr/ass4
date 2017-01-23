@@ -1,4 +1,4 @@
-from datetime import time
+import time
 
 
 def getFirstName():
@@ -9,25 +9,23 @@ def getLastName():
     pass
 
 
-def getroomstoclean():
+def getemptyrooms():
     return ""
     # rooms should be in ascending order
     pass
 
 
 def dohoteltask(taskname, parameter):
-    timebefore = time()
+    timetook = time.time()
 
     if taskname == "𝑤𝑎𝑘𝑒𝑢𝑝":
         print(getFirstName() + " " + getLastName() +
-              "in room" + parameter + " received a wakeup call at " + timebefore)
+              "in room" + parameter + " received a wakeup call at " + timetook)
     elif taskname == "breakfast":
         print(getFirstName() + " " + getLastName() +
-              "in room" + parameter + " has been served breakfast at " + timebefore)
+              "in room" + parameter + " has been served breakfast at " + timetook)
     elif taskname == "clean":
-        print("rooms " + getroomstoclean() + " were cleaned at " + timebefore)
+        print("rooms " + getemptyrooms() + " were cleaned at " + timetook)
 
-    timeafter = time()
-
-    return timeafter - timebefore
+    return timetook
     pass

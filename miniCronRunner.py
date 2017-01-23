@@ -1,13 +1,32 @@
-import hotelManagement
+import time
 import hotelWorker
 
 def areanytaskleft():
+    return not gettasksleft()
     pass
 
 
-while(hotelManagement.istheredb() and areanytaskleft()) :
-    taskname = ""
-    numtimes = 0
-    time = hotelWorker.dohoteltask(taskname, "")
-    numtimes -= 1
-    print(taskname + " took " + time + " seconds")
+def decreasenumtimes(taskname):
+    pass
+
+
+def gettasksleft():
+    lst=[1,2,4]
+    return lst
+    pass
+
+def getdoevery(taskname):
+    pass
+
+tasktimes= dict()
+
+def istheredb():
+    pass
+
+
+while istheredb() and areanytaskleft():
+    for taskname in gettasksleft():
+        if getdoevery(taskname) + tasktimes[taskname] >= time.time():
+            timetook = hotelWorker.dohoteltask(taskname, "")
+            tasktimes[taskname] = timetook
+            decreasenumtimes(taskname)
