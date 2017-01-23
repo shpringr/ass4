@@ -1,5 +1,7 @@
+import os
 import time
 import hotelWorker
+import sqlite3
 
 def areanytaskleft():
     return not gettasksleft()
@@ -21,8 +23,8 @@ def getdoevery(taskname):
 tasktimes= dict()
 
 def istheredb():
+    return os.path.isfile('cronhoteldb.db')
     pass
-
 
 while istheredb() and areanytaskleft():
     for taskname in gettasksleft():
