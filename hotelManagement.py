@@ -1,13 +1,12 @@
-import hotelWorker
+databasename = "crontabdb.db"
+
+def istheredb():
+    return None
 
 
-def isThereDB():
+def createdb():
     pass
 
 
-def areAnyTaskLeft():
-    pass
-
-
-while(isThereDB() and areAnyTaskLeft()) :
-    hotelWorker.dohoteltask("", "")
+if not istheredb() :
+    createdb()
