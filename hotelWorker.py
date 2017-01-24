@@ -25,7 +25,7 @@ def getemptyrooms():
 
 
 def getresident(parameter):
-    cursor.execute("SELECT r.FirstName, LastName FROM Residents r " +
+    cursor.execute("SELECT r.FirstName, r.LastName FROM Residents r " +
                    "WHERE r.RoomNumber = ?", (parameter,))
     return cursor.fetchone()
 
@@ -45,4 +45,5 @@ def dohoteltask(taskname, parameter):
     elif taskname == "clean":
         print("rooms " + getemptyrooms() + " were cleaned at " + str(timetook))
 
+    connection.close()
     return timetook
