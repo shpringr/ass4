@@ -60,6 +60,7 @@ def inserttasktime(taskid, doevery, numtimes):
 def insertdata(filename):
     inputfilename = filename
     tasksequence = 0
+
     with open(inputfilename) as inputfile:
         for line in inputfile.read().splitlines():
             lst = line.split(',')
@@ -80,6 +81,7 @@ def insertdata(filename):
                 inserttasktime(tasksequence, lst[1], lst[2])
                 tasksequence += 1
 
+    if connection is not None:
         connection.commit()
         connection.close()
 
