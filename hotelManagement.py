@@ -10,7 +10,7 @@ def main(args):
     if not istheredb():
         createdb()
         insertdata(args[1])
-    if connection is not None:
+    if not connection:
         connection.close()
 
 
