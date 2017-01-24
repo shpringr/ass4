@@ -10,6 +10,8 @@ def main(args):
     if not istheredb():
         createdb()
         insertdata(args[1])
+    if connection is not None:
+        connection.close()
 
 
 def istheredb():
@@ -81,9 +83,7 @@ def insertdata(filename):
                 inserttasktime(tasksequence, lst[1], lst[2])
                 tasksequence += 1
 
-    if connection is not None:
-        connection.commit()
-        connection.close()
+    connection.commit()
 
 
 if __name__ == '__main__':

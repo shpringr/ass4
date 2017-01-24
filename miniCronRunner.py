@@ -5,11 +5,28 @@ import sqlite3
 
 connection = [None]
 cursor = [None]
+tasktimes = dict()
+
+
+def main():
+    while istheredb() and areanytaskleft():
+        for row in gettasksleft():
+            taskid = row[0]
+            taskname = row[1]
+            parameter = row[2]
+            doevery = row[3]
+            if tasktimes.get(taskid) is None or doevery + tasktimes[taskid] <= time.time():
+                timetook = hotelWorker.dohoteltask(taskname, parameter)
+                tasktimes[taskid] = timetook
+                decreasenumtimes(taskid)
+    if not connection:
+        connection.close()
 
 
 def istheredb():
     istheredb = os.path.isfile('cronhoteldb.db')
-    if istheredb: connecttodb()
+    if istheredb:
+        connecttodb()
     return istheredb
 
 
@@ -32,22 +49,12 @@ def decreasenumtimes(taskid):
 
 
 def gettasksleft():
-    cursor.execute("SELECT t.TaskId, t.TaskName, t.parameter, tt.DoEvery FROM Tasks AS t " +
+    cursor.execute("SELECT t.TaskId, t.TaskName, t.Parameter, tt.DoEvery FROM Tasks AS t " +
                    "JOIN TaskTimes AS tt " +
                    "ON t.TaskId = tt.TaskId " +
                    "WHERE tt.NumTimes > 0")
     return cursor.fetchall()
 
 
-tasktimes = dict()
-
-while istheredb() and areanytaskleft():
-    for row in gettasksleft():
-        taskid = row[0]
-        taskname = row[1]
-        parameter = row[2]
-        doevery = row[3]
-        if tasktimes.get(taskid) is None or doevery + tasktimes[taskid] <= time.time():
-            timetook = hotelWorker.dohoteltask(taskname, parameter)
-            tasktimes[taskid] = timetook
-            decreasenumtimes(taskid)
+if __name__ == '__main__':
+    main()
